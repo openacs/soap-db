@@ -1,0 +1,96 @@
+ad_library {
+    
+    Example Library for SOAP-Gateway oacs_server Procs, this is the client implementation of soap-db within openacs.
+    We use the soap-gateway package to actually make available this procs, 
+    though you might have this kind of implementation in another environment like .NET or so,
+    but you have to make it return the same stuff that teh db_* procs does.
+    
+    @author Derick Leony (derickleony@galileo.edu)
+    @creation-date 2006-01-25
+}
+
+namespace eval sg::oacs_server {}
+
+ad_proc -public sg::oacs_server::db_string {
+    query
+} {
+    Permorms a query and returns the row.
+    
+    @author Derick Leony (derickleony@galileo.edu)
+    @idl string DBString(string query)
+} {
+
+    set result [::db_string -dbn udbint select_string $query -default ""]
+    return $result
+
+}
+
+ad_proc -public sg::oacs_server::db_0or1row {
+    query
+} {
+    Permorms a query and returns the row in the form
+    { 0or1 {field_1 value_1} {field_2 value_2} ... }.
+    
+    @author Derick Leony (derickleony@galileo.edu)
+    @idl string DB0Or1Row(string query)
+} {
+    set result [list]
+    set exists [::db_0or1row -dbn udbint select_string $query -column_array row]
+    lappend result $exists
+    if {$exists} {
+	lappend result [array get row]
+    }
+    return $result
+
+}
+
+ad_proc -public sg::oacs_server::db_list_of_arrays {
+    query
+} {
+    Permorms a query and returns the list of arrays.
+    
+    @author Derick Leony (derickleony@galileo.edu)
+    @idl string DBListOfArrays(string query)
+} {
+    set result [list]
+    ::db_foreach -dbn udbint select_string $query -column_array row {
+	lappend result [array get row]
+    }
+    return $result
+
+}
+
+ad_proc -public sg::oacs_server::db_list_of_lists {
+    query
+} {
+    Permorms a query and returns the list of lists.
+    
+    @author Derick Leony (derickleony@galileo.edu)
+    @idl string DBListOfLists(string query)
+} {
+    set result [::db_list_of_lists -dbn udbint select_list $query]
+    return $result
+}
+
+ad_proc -public sg::oacs_server::db_list {
+    query
+} {
+    Permorms a query and returns a list.
+    
+    @author Derick Leony (derickleony@galileo.edu)
+    @idl string DBList(string query)
+} {
+    set result [::db_list -dbn udbint select_list $query]
+    return $result
+}
+
+ad_proc -public sg::oacs_server::db_dml {
+    query
+} {
+    Permorms a DML operation and returns nothing.
+    
+    @author Derick Leony (derickleony@galileo.edu)
+    @idl void DBDml(string query)
+} {
+    set result [::db_dml -dbn udbint dml_statement $query]
+}
