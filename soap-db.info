@@ -8,6 +8,7 @@
     <singleton-p>t</singleton-p>
     
     <version name="0.1d" url="http://openacs.org/repository/download/apm/soap-db-0.1d.apm">
+        <owner url="mailto:roc@viaro.net">Rocael Hernandez</owner>
         <owner url="mailto:derickleony@galileo.edu">Derick Leony</owner>
 
         <!-- No dependency information -->
