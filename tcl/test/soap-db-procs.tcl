@@ -75,7 +75,7 @@ aa_register_case \
 
 		set no_result [soap_db::db_0or1row -dbn udb get_no_data "select sysdate as nonexsistant, sysdate as unchanged from dual where 1=0"]
 		aa_false "No rows query returned 0." $no_result
-		aa_false "No rows query didn't create a non existant variable." [info exists nonexistant]
+		aa_false "No rows query didn't create a non existent variable." [info exists nonexistent]
 		aa_true "No rows query didn't change initial value of a variable." [string eq $random_string $unchanged]
 
             }
