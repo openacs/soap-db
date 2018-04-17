@@ -1,10 +1,10 @@
 ad_library {
-    
+
     Example Library for SOAP-Gateway oacs_server Procs, this is the client implementation of soap-db within openacs.
-    We use the soap-gateway package to actually make available this procs, 
+    We use the soap-gateway package to actually make available this procs,
     though you might have this kind of implementation in another environment like .NET or so,
-    but you have to make it return the same stuff that teh db_* procs does.
-    
+    but you have to make it return the same stuff that the db_* procs does.
+
     @author Derick Leony (derickleony@galileo.edu)
     @creation-date 2006-01-25
 }
@@ -15,7 +15,7 @@ ad_proc -public sg::oacs_server::db_string {
     query
 } {
     Permorms a query and returns the row.
-    
+
     @author Derick Leony (derickleony@galileo.edu)
     @idl string DBString(string query)
 } {
